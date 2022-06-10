@@ -1,18 +1,20 @@
 import numpy as np
+from typing import Union
 from spikeinterface.core.waveform_extractor import WaveformExtractor
 from spikeinterface.core.baserecording import BaseRecording
 from spikeinterface.core.basesorting import BaseSorting
 from spikeinterface.toolkit import get_template_channel_sparsity
 from .matplotlib.mpl_unit_waveforms import mpl_unit_waveforms
+from ._get_plot_mode import _get_plot_mode
 
 
 def plot_unit_waveforms(
     waveform_extractor: WaveformExtractor, channel_ids=None, unit_ids=None,
-    plot_waveforms=True, plot_templates=True, plot_channels=False,
-    unit_colors=None, max_channels=None, radius_um=None,
-    ncols=5, axes=None, lw=1, axis_equal=False, unit_selected_waveforms=None,
-    set_title=True,
-    plot_mode='matplotlib'
+    plot_waveforms: bool=True, plot_templates=True, plot_channels=False,
+    unit_colors=None, max_channels: int=None, radius_um: float=None,
+    ncols: int=5, axes=None, lw: float=1, axis_equal: bool=False, unit_selected_waveforms=None,
+    set_title: bool=True,
+    plot_mode: Union[str, None]=None
 ):
     """
     Plots unit waveforms.
@@ -55,6 +57,8 @@ def plot_unit_waveforms(
     plot_mode: plotting mode (str)
         options: 'matplotlib' (default), 'sortingview'
     """
+
+    plot_mode = _get_plot_mode(plot_mode)
 
     # Note: axis_equal is not used
 
